@@ -1,0 +1,29 @@
+{
+  "component": "BizTable",
+  "summary": "带分页与行操作的数据表格，列表页的标准展示组件",
+  "rules": [
+    {
+      "id": "BizTable/required-props",
+      "level": "error",
+      "check": "ast",
+      "type": "required-prop",
+      "props": ["rowKey", "columns"],
+      "reason": "缺少 rowKey 会导致行更新、选中状态错乱；缺少 columns 则表格无列可渲染"
+    },
+    {
+      "id": "BizTable/no-native-el-table",
+      "level": "error",
+      "check": "ast",
+      "type": "forbidden-tag",
+      "tags": ["el-table", "ElTable"],
+      "reason": "列表页必须使用 BizTable，直接使用 el-table 会绕过统一的分页、加载与操作列约定"
+    },
+    {
+      "id": "BizTable/prefer-actions-slot",
+      "level": "warn",
+      "check": "hint",
+      "type": "hint",
+      "reason": "行操作（编辑、删除）放在 actions 插槽中，不要自行追加操作列"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "component": "BizSearchBar",
+  "summary": "列表页顶部的筛选区，根据字段定义渲染筛选控件并提供查询与重置",
+  "rules": [
+    {
+      "id": "BizSearchBar/required-props",
+      "level": "error",
+      "check": "ast",
+      "type": "required-prop",
+      "props": ["fields", "model"],
+      "reason": "fields 决定渲染哪些筛选项，model 由页面持有以便查询时读取条件"
+    },
+    {
+      "id": "BizSearchBar/required-search-handler",
+      "level": "error",
+      "check": "ast",
+      "type": "required-event",
+      "events": ["search"],
+      "reason": "组件本身不发请求，未监听 search 事件则点击查询没有任何效果"
+    },
+    {
+      "id": "BizSearchBar/no-native-inline-form",
+      "level": "error",
+      "check": "ast",
+      "type": "forbidden-tag",
+      "tags": ["el-form", "ElForm"],
+      "reason": "筛选区应使用 BizSearchBar；页面内手写 el-form 会与组件的查询、重置约定不一致"
+    }
+  ]
+}

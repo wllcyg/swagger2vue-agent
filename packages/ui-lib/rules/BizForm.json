@@ -1,0 +1,31 @@
+{
+  "component": "BizForm",
+  "summary": "新增与编辑共用的表单，根据字段定义渲染表单项并内置必填校验",
+  "rules": [
+    {
+      "id": "BizForm/required-props",
+      "level": "error",
+      "check": "ast",
+      "type": "required-prop",
+      "props": ["fields", "model"],
+      "reason": "fields 决定表单项与必填校验，model 由页面持有用于编辑回填"
+    },
+    {
+      "id": "BizForm/required-submit-handler",
+      "level": "error",
+      "check": "ast",
+      "type": "required-event",
+      "events": ["submit"],
+      "reason": "校验通过后组件通过 submit 事件交出数据，未监听则表单提交不会触发任何请求"
+    },
+    {
+      "id": "BizForm/no-nested-form",
+      "level": "error",
+      "check": "ast",
+      "type": "forbidden-nesting",
+      "parent": "BizForm",
+      "child": "BizForm",
+      "reason": "表单嵌套会产生非法的 form 结构，校验与提交状态互相干扰"
+    }
+  ]
+}
